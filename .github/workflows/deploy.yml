@@ -27,3 +27,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
+          user_email: 43279392+fakej1nx1e@users.noreply.github.com
+          user_name: fakej1nx1e
