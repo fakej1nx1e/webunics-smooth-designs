@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
 const ADMIN_PASSWORD = "webunics1983!?";
 const AUTH_KEY = "webunics_admin_auth";
@@ -12,7 +11,6 @@ export const AuthWrapper = ({ children }: AuthWrapperProps) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   useEffect(() => {
     const auth = localStorage.getItem(AUTH_KEY);
@@ -40,26 +38,40 @@ export const AuthWrapper = ({ children }: AuthWrapperProps) => {
 
   if (!isAuthenticated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="bg-white p-8 rounded-lg shadow-md w-96">
-          <h1 className="text-2xl font-bold mb-6 text-center">Admin Login</h1>
-          <form onSubmit={handleLogin}>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Passwort eingeben"
-              className="w-full px-4 py-2 border rounded-md mb-4"
-              autoFocus
-            />
-            {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
-            <button
-              type="submit"
-              className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700"
-            >
-              Login
-            </button>
-          </form>
+      <div className="min-h-screen relative overflow-x-hidden flex items-center justify-center">
+        <div className="absolute inset-0 grid-pattern opacity-40 [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
+        <div className="absolute -top-40 -left-40 h-96 w-96 rounded-full bg-primary/30 blur-[140px] animate-glow-pulse" />
+        <div className="absolute -bottom-40 -right-40 h-96 w-96 rounded-full bg-accent/25 blur-[140px] animate-glow-pulse" style={{ animationDelay: "1.5s" }} />
+
+        <div className="container relative animate-fade-in-slow">
+          <div className="max-w-md mx-auto">
+            <div className="text-center mb-8">
+              <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight text-gradient bg-[length:200%_auto] animate-gradient-shift">
+                Webunics
+              </h1>
+              <p className="mt-4 text-muted-foreground">Admin Bereich</p>
+            </div>
+
+            <div className="glass rounded-3xl p-8 shadow-elegant">
+              <form onSubmit={handleLogin}>
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Passwort eingeben"
+                  className="w-full px-4 py-3 rounded-xl bg-background/50 border-border focus:border-primary focus:outline-none transition-colors mb-4"
+                  autoFocus
+                />
+                {error && <p className="text-red-500 text-sm mb-4 text-center">{error}</p>}
+                <button
+                  type="submit"
+                  className="w-full bg-iridescent text-white py-3 rounded-xl font-medium hover:opacity-90 transition-opacity"
+                >
+                  Login
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -67,14 +79,17 @@ export const AuthWrapper = ({ children }: AuthWrapperProps) => {
 
   return (
     <div>
-      <div className="fixed top-4 right-4 z-50">
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 text-white px-4 py-2 rounded-md text-sm hover:bg-red-600"
-        >
-          Logout
-        </button>
-      </div>
+      <button
+        onClick={() => {
+          localStorage.removeItem(AUTH_KEY);
+          window.location.reload();
+        }}
+        className="fixed top-4 right-4 z-[9999] glass px-4 py-2 rounded-xl text-sm cursor-pointer hover:opacity-80 transition-opacity bg-background/80 backdrop-blur-sm border border-border"
+        type="button"
+        style={{ position: 'fixed', zIndex: 9999, pointerEvents: 'auto' }}
+      >
+        Logout
+      </button>
       {children}
     </div>
   );
