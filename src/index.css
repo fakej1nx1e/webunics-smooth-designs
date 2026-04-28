@@ -7,6 +7,14 @@
 */
 
 @layer base {
+  body {
+    cursor: none !important;
+  }
+  
+  * {
+    cursor: none !important;
+  }
+  
   :root {
     /* Base */
     --background: 240 30% 6%;
