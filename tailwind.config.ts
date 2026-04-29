@@ -69,6 +69,12 @@ export default {
         md: "calc(var(--radius) - 4px)",
         sm: "calc(var(--radius) - 8px)",
       },
+      boxShadow: {
+        elegant: "0 25px 80px -20px hsl(268 85% 30% / 0.5)",
+        card: "0 10px 40px -10px hsl(240 30% 2% / 0.6)",
+        "glow-primary": "0 0 60px hsl(268 85% 65% / 0.4)",
+        "glow-accent": "0 0 60px hsl(165 90% 55% / 0.35)",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -106,6 +112,10 @@ export default {
           "0%, 100%": { backgroundPosition: "0% 50%" },
           "50%": { backgroundPosition: "100% 50%" },
         },
+        "morph-blob": {
+          "0%, 100%": { borderRadius: "60% 40% 30% 70% / 60% 30% 70% 40%" },
+          "50%": { borderRadius: "30% 60% 70% 40% / 50% 60% 30% 60%" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +127,7 @@ export default {
         "glow-pulse": "glow-pulse 4s ease-in-out infinite",
         shimmer: "shimmer 3s linear infinite",
         "gradient-shift": "gradient-shift 8s ease infinite",
+        "morph-blob": "morph-blob 8s ease-in-out infinite",
       },
     },
   },

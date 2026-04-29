@@ -1,84 +1,154 @@
 import { useState, useEffect } from "react";
-import { motion, useSpring, useTransform } from "framer-motion";
+import { motion, useSpring, useTransform, useMotionValue } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: -100, y: -100 });
+  const { isTouch } = useIsMobile();
+
+  const [isPointer, setIsPointer] = useState(false);
+  const [isClicking, setIsClicking] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [hoveredRect, setHoveredRect] = useState<DOMRect | null>(null);
 
-  const springConfig = { stiffness: 200, damping: 25 };
-  const springX = useSpring(0, springConfig);
-  const springY = useSpring(0, springConfig);
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
 
-  // Kreis zentriert auf (springX, springY) - 12 ist die Hälfte von 24px
-  const circleX = useTransform(springX, v => v - 12);
-  const circleY = useTransform(springY, v => v - 12);
+  const ringX = useSpring(cursorX, { stiffness: 300, damping: 25, mass: 0.8 });
+  const ringY = useSpring(cursorY, { stiffness: 300, damping: 25, mass: 0.8 });
+
+  const dotX = useSpring(cursorX, { stiffness: 600, damping: 20, mass: 0.3 });
+  const dotY = useSpring(cursorY, { stiffness: 600, damping: 20, mass: 0.3 });
+
+  const ringScale = useSpring(1, { stiffness: 400, damping: 30, mass: 0.5 });
+  const dotScale = useSpring(1, { stiffness: 400, damping: 30, mass: 0.5 });
+  const ringOpacity = useSpring(0.6, { stiffness: 400, damping: 30, mass: 0.5 });
 
   useEffect(() => {
-    const updatePosition = (e: MouseEvent) => {
-      const x = e.clientX;
-      const y = e.clientY;
-      setPosition({ x, y });
-      springX.set(x);
-      springY.set(y);
+    if (isPointer) {
+      ringScale.set(2.5);
+      dotScale.set(0);
+      ringOpacity.set(0.3);
+    } else if (isClicking) {
+      ringScale.set(0.8);
+      dotScale.set(0.5);
+      ringOpacity.set(0.6);
+    } else {
+      ringScale.set(1);
+      dotScale.set(1);
+      ringOpacity.set(0.6);
+    }
+  }, [isPointer, isClicking]);
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
-    const updateHoverState = () => {
-      const el = document.elementFromPoint(position.x, position.y);
-      const interactive =
-        el?.tagName === "BUTTON" ||
-        el?.tagName === "A" ||
-        el?.closest("button") ||
-        el?.closest("a");
-
-      if (interactive) {
-        setHoveredRect((interactive as HTMLElement).getBoundingClientRect());
-      } else {
-        setHoveredRect(null);
-      }
+    const handleMouseLeave = () => {
+      cursorX.set(-100);
+      cursorY.set(-100);
     };
 
-    window.addEventListener("mousemove", updatePosition);
-    window.addEventListener("mousemove", updateHoverState);
+    window.addEventListener("mousemove", handleMouseMove);
+    document.body.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
-      window.removeEventListener("mousemove", updatePosition);
-      window.removeEventListener("mousemove", updateHoverState);
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.body.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [position.x, position.y]);
+  }, [cursorX, cursorY]);
 
-  return (
+  useEffect(() => {
+    const updateCursor = () => {
+      const xVal = cursorX.get();
+      const yVal = cursorY.get();
+      const el = document.elementFromPoint(xVal, yVal);
+      if (!el) return;
+
+      const interactive =
+        el.tagName === "BUTTON" ||
+        el.tagName === "A" ||
+        el.tagName === "INPUT" ||
+        el.tagName === "TEXTAREA" ||
+        el.closest("button") ||
+        el.closest("a") ||
+        el.closest("[role='button']") ||
+        el.closest("[data-cursor-pointer]");
+
+      setIsPointer(!!interactive);
+      setHoveredRect(interactive ? (interactive as HTMLElement).getBoundingClientRect() : null);
+    };
+
+    const interval = setInterval(updateCursor, 50);
+    return () => clearInterval(interval);
+  }, [cursorX, cursorY]);
+
+  useEffect(() => {
+    const handleMouseDown = () => setIsClicking(true);
+    const handleMouseUp = () => setIsClicking(false);
+    const handleBlur = () => setIsVisible(false);
+    const handleFocus = () => setIsVisible(true);
+
+    window.addEventListener("mousedown", handleMouseDown);
+    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("blur", handleBlur);
+    window.addEventListener("focus", handleFocus);
+
+    return () => {
+      window.removeEventListener("mousedown", handleMouseDown);
+      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("blur", handleBlur);
+      window.removeEventListener("focus", handleFocus);
+    };
+  }, []);
+
+  return isVisible && !isTouch ? (
     <>
-      {/* Punkt - sofort */}
-      <div
-        className="fixed top-0 left-0 pointer-events-none z-[9999]"
+      <motion.div
+        className="fixed pointer-events-none z-[9999] mix-blend-difference"
         style={{
-          transform: `translate(${position.x - 2}px, ${position.y - 2}px)`,
+          left: dotX,
+          top: dotY,
+          x: "-50%",
+          y: "-50%",
+          scale: dotScale,
         }}
       >
-        <div className="w-1 h-1 bg-foreground rounded-full" />
-      </div>
-
-      {/* Kreis - mit Delay und zentriert */}
-      <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[9998]"
-        style={{ x: circleX, y: circleY }}
-        animate={
-          hoveredRect
-            ? {
-                width: hoveredRect.width,
-                height: hoveredRect.height,
-                x: hoveredRect.left,
-                y: hoveredRect.top,
-              }
-            : {
-                width: 24,
-                height: 24,
-              }
-        }
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      >
-        <div className="w-full h-full rounded-full border-2 border-foreground/50" />
+        <div className="w-1 h-1 bg-white rounded-full" />
       </motion.div>
+
+      <motion.div
+        className="fixed pointer-events-none z-[9998] mix-blend-difference"
+        style={{
+          left: ringX,
+          top: ringY,
+          x: "-50%",
+          y: "-50%",
+          scale: ringScale,
+          opacity: ringOpacity,
+        }}
+      >
+        <div className="w-6 h-6 rounded-full border border-white/70" />
+      </motion.div>
+
+      {isPointer && hoveredRect && (
+        <motion.div
+          className="fixed pointer-events-none z-[9997] mix-blend-difference"
+          style={{
+            left: hoveredRect.left,
+            top: hoveredRect.top,
+            width: hoveredRect.width,
+            height: hoveredRect.height,
+          }}
+          initial={{ opacity: 0, borderRadius: "20px" }}
+          animate={{ opacity: 1, borderRadius: hoveredRect.height < 40 ? "12px" : "16px" }}
+          exit={{ opacity: 0, borderRadius: "20px" }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+        >
+          <div className="w-full h-full rounded-lg bg-white/5 border border-white/10" />
+        </motion.div>
+      )}
     </>
-  );
+  ) : null;
 };

@@ -7,12 +7,14 @@
 */
 
 @layer base {
-  body {
-    cursor: none !important;
-  }
-  
-  * {
-    cursor: none !important;
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      cursor: none !important;
+    }
+    
+    * {
+      cursor: none !important;
+    }
   }
   
   :root {
@@ -149,5 +151,28 @@
       linear-gradient(hsl(230 20% 95% / 0.04) 1px, transparent 1px),
       linear-gradient(90deg, hsl(230 20% 95% / 0.04) 1px, transparent 1px);
     background-size: 56px 56px;
+  }
+
+  .animate-heartbeat-glow {
+    animation: heartbeatGlow 2.5s ease-in-out infinite;
+    filter: drop-shadow(0 0 20px hsl(280 90% 70% / 0.4)) drop-shadow(0 0 40px hsl(280 90% 70% / 0.2));
+  }
+
+  @keyframes heartbeatGlow {
+    0%, 100% {
+      filter: drop-shadow(0 0 20px hsl(280 90% 70% / 0.4)) drop-shadow(0 0 40px hsl(280 90% 70% / 0.2));
+    }
+    15% {
+      filter: drop-shadow(0 0 30px hsl(280 90% 70% / 0.7)) drop-shadow(0 0 60px hsl(280 90% 70% / 0.4)) drop-shadow(0 0 80px hsl(165 90% 60% / 0.25));
+    }
+    30% {
+      filter: drop-shadow(0 0 20px hsl(280 90% 70% / 0.4)) drop-shadow(0 0 40px hsl(280 90% 70% / 0.2));
+    }
+    45% {
+      filter: drop-shadow(0 0 25px hsl(280 90% 70% / 0.5)) drop-shadow(0 0 50px hsl(280 90% 70% / 0.3)) drop-shadow(0 0 70px hsl(165 90% 60% / 0.15));
+    }
+    60% {
+      filter: drop-shadow(0 0 20px hsl(280 90% 70% / 0.4)) drop-shadow(0 0 40px hsl(280 90% 70% / 0.2));
+    }
   }
 }

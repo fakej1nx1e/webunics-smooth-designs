@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { motion, useSpring, useTransform } from "framer-motion";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 const LOCAL_SERVER_URL = "http://localhost:3001";
 
@@ -13,11 +14,16 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
   const [hearts, setHearts] = useState<{ id: number; x: number; delay: number }[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { isTouch } = useIsMobile();
+
   const mouseX = useSpring(0, { stiffness: 300, damping: 30 });
   const mouseY = useSpring(0, { stiffness: 300, damping: 30 });
 
+  const rotateX = useTransform(mouseY, [-0.5, 0.5], isTouch ? [0, 0] : [5, -5]);
+  const rotateY = useTransform(mouseX, [-0.5, 0.5], isTouch ? [0, 0] : [-5, 5]);
+
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || isTouch) return;
     const rect = containerRef.current.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -25,8 +31,11 @@ const Contact = () => {
     mouseY.set(y);
   };
 
-  const rotateX = useTransform(mouseY, [-0.5, 0.5], [5, -5]);
-  const rotateY = useTransform(mouseX, [-0.5, 0.5], [-5, 5]);
+  const handleMouseLeave = () => {
+    if (isTouch) return;
+    mouseX.set(0);
+    mouseY.set(0);
+  };
 
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,10 +96,7 @@ const Contact = () => {
           <motion.div
             ref={containerRef}
             onMouseMove={handleMouseMove}
-            onMouseLeave={() => {
-              mouseX.set(0);
-              mouseY.set(0);
-            }}
+            onMouseLeave={handleMouseLeave}
             className="relative glass rounded-3xl overflow-hidden p-8 md:p-14 shadow-elegant"
             style={{ rotateX, rotateY }}
             whileHover={{ scale: 1.02 }}
