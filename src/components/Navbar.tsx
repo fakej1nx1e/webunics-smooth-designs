@@ -7,8 +7,8 @@ import { useIsMobile } from "@/hooks/useIsMobile";
 const links = [
   { href: "#services", label: "Services" },
   { href: "#portfolio", label: "Portfolio" },
-  { href: "#about", label: "Über uns" },
-  { href: "#process", label: "Prozess" },
+  { href: "#about", label: "About" },
+  { href: "#process", label: "Process" },
 ];
 
 const Navbar = () => {
@@ -110,7 +110,7 @@ const Navbar = () => {
                 whileTap={isTouch ? undefined : { scale: 0.98 }}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
               >
-                Projekt starten
+                Start Project
               </motion.a>
             </Button>
           </motion.div>
@@ -120,7 +120,7 @@ const Navbar = () => {
             className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            aria-label={open ? "Menü schließen" : "Menü öffnen"}
+            aria-label={open ? "Close menu" : "Open menu"}
           >
             <AnimatePresence mode="wait">
               {open ? (
@@ -184,7 +184,7 @@ const Navbar = () => {
                     className="mt-2 w-full"
                   >
                     <a href="#contact" onClick={() => setOpen(false)}>
-                      Projekt starten
+                      Start Project
                     </a>
                   </Button>
                 </motion.div>

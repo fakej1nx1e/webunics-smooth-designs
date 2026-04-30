@@ -32,14 +32,14 @@ const founders = [
     initials: "LH",
     name: "Lenard Hildenberg",
     role: "Development & IT",
-    bio: "4 Jahre Erfahrung mit React und TypeScript. Baut moderne, performante Webanwendungen.",
+    bio: "4 years of experience with React and TypeScript. Builds modern, performant web applications.",
     gradient: "from-primary to-accent",
   },
   {
     initials: "CS",
     name: "Christopher Spaet",
-    role: "Marketing & Organisierung",
-    bio: "Verantwortlich für Marketing und Organisation. Sorgt mit exzellentem Kundenservice für reibungslose Abläufe.",
+    role: "Marketing & Organization",
+    bio: "Responsible for marketing and organization. Ensures smooth processes with excellent customer service.",
     gradient: "from-accent to-primary",
   },
 ];
@@ -90,11 +90,11 @@ const About = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              Das Team
+              The Team
             </motion.div>
             <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-balance">
-              Zwei Köpfe.{" "}
-              <span className="text-gradient">Eine Mission.</span>
+              Two heads.{" "}
+              <span className="text-gradient">One Mission.</span>
             </h2>
             <motion.p
               className="mt-5 text-lg text-muted-foreground leading-relaxed"
@@ -102,9 +102,9 @@ const About = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              Webunics ist ein bewusst kleines Studio. Du arbeitest direkt mit den
-              beiden Personen, die deine Website designen und bauen — kein Account
-              Manager, keine Übergaben.
+              Webunics is a deliberately small studio. You work directly with the
+              two people who design and build your website — no account
+              manager, no handoffs.
             </motion.p>
             <motion.p
               className="mt-4 text-muted-foreground"
@@ -112,8 +112,8 @@ const About = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              Diese Nähe ist unser Vorteil: schnellere Entscheidungen, höhere
-              Qualität und ein Ergebnis, das wirklich zu dir passt.
+              This closeness is our advantage: faster decisions, higher
+              quality, and a result that truly fits you.
             </motion.p>
           </motion.div>
 
@@ -191,9 +191,9 @@ const About = () => {
             >
               <div className="grid sm:grid-cols-3 gap-6 text-center sm:text-left">
                 {[
-                  { value: "100%", label: "Direkter Kontakt", delay: 0.6 },
-                  { value: "14d", label: "Ø Time-to-Launch", delay: 0.7 },
-                  { value: "98%", label: "Zufriedene Kunden", delay: 0.8 },
+{ value: "100%", label: "Direct Contact", delay: 0.6 },
+                   { value: "14d", label: "Avg. Time-to-Launch", delay: 0.7 },
+                   { value: "98%", label: "Satisfied Clients", delay: 0.8 },
                 ].map((stat, i) => (
                   <motion.div
                     key={stat.label}

@@ -137,11 +137,11 @@ const Portfolio = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              Ausgewählte Arbeiten
+              Selected Work
             </motion.div>
             <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-balance">
-              Projekte, die wir mit{" "}
-              <span className="text-gradient">Stolz zeigen</span>
+Projects we're{" "}
+                <span className="text-gradient">proud to show</span>
             </h2>
           </div>
           <motion.a
@@ -150,7 +150,7 @@ const Portfolio = () => {
             whileHover={{ x: 5 }}
             transition={{ duration: 0.3 }}
           >
-            Vollständiges Portfolio anfragen
+            Request full portfolio
             <ArrowUpRight
               size={16}
               className="transition-smooth group-hover:translate-x-0.5 group-hover:-translate-y-0.5"

@@ -51,7 +51,7 @@ export const AdminPanel = () => {
       setIsAuthenticated(true);
       setError("");
     } else {
-      setError("Falsches Passwort");
+      setError("Wrong password");
       setPassword("");
     }
   };
@@ -64,7 +64,7 @@ export const AdminPanel = () => {
     try {
       await fetch(`${LOCAL_SERVER_URL}/inquiries/${index}`, { method: "DELETE" });
     } catch (error) {
-      console.error("Fehler beim Löschen:", error);
+      console.error("Error deleting:", error);
     }
   };
 
@@ -74,7 +74,7 @@ export const AdminPanel = () => {
     try {
       await fetch(`${LOCAL_SERVER_URL}/inquiries`, { method: "DELETE" });
     } catch (error) {
-      console.error("Fehler beim Löschen aller Anfragen:", error);
+      console.error("Error deleting all inquiries:", error);
     }
   };
 
@@ -91,7 +91,7 @@ export const AdminPanel = () => {
               <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight text-gradient bg-[length:200%_auto] animate-gradient-shift">
                 Webunics
               </h1>
-              <p className="mt-4 text-muted-foreground">Admin Bereich</p>
+              <p className="mt-4 text-muted-foreground">Admin Area</p>
             </div>
 
             <div className="glass rounded-3xl p-8 shadow-elegant">
@@ -100,7 +100,7 @@ export const AdminPanel = () => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Passwort eingeben"
+                  placeholder="Enter password"
                   className="w-full px-4 py-3 rounded-xl bg-background/50 border border-border focus:border-primary focus:outline-none transition-colors mb-4"
                   autoFocus
                 />
@@ -130,18 +130,18 @@ export const AdminPanel = () => {
           onClick={() => navigate("/")}
           className="mb-8 glass px-4 py-2 rounded-xl text-sm cursor-pointer hover:opacity-80 transition-opacity inline-flex items-center gap-2"
         >
-          ← Zurück zur Homepage
+          ← Back to Homepage
         </button>
 
         <h1 className="font-display text-5xl font-semibold text-center mb-4 text-gradient bg-[length:200%_auto] animate-gradient-shift">
-          Anfragen
+Inquiries
         </h1>
-        <p className="text-center text-muted-foreground mb-12">Alle eingegangenen Kontaktanfragen</p>
+        <p className="text-center text-muted-foreground mb-12">All incoming contact inquiries</p>
 
         {loading ? (
-          <p className="text-center text-muted-foreground">Lade Anfragen...</p>
+          <p className="text-center text-muted-foreground">Loading inquiries...</p>
         ) : inquiries.length === 0 ? (
-          <p className="text-center text-muted-foreground glass rounded-3xl p-8">Noch keine Anfragen eingegangen.</p>
+          <p className="text-center text-muted-foreground glass rounded-3xl p-8">No inquiries yet.</p>
         ) : (
           <>
             <div className="flex justify-end mb-6">
@@ -149,7 +149,7 @@ export const AdminPanel = () => {
                 onClick={handleDeleteAll}
                 className="glass px-4 py-2 rounded-xl text-sm text-red-500 hover:bg-red-500/10 transition-colors cursor-pointer"
               >
-                Alle löschen
+                Delete All
               </button>
             </div>
             <div className="space-y-5 max-w-4xl mx-auto">

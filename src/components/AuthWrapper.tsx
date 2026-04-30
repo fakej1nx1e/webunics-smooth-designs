@@ -26,7 +26,7 @@ export const AuthWrapper = ({ children }: AuthWrapperProps) => {
       setIsAuthenticated(true);
       setError("");
     } else {
-      setError("Falsches Passwort");
+      setError("Wrong password");
       setPassword("");
     }
   };
@@ -49,7 +49,7 @@ export const AuthWrapper = ({ children }: AuthWrapperProps) => {
               <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight text-gradient bg-[length:200%_auto] animate-gradient-shift">
                 Webunics
               </h1>
-              <p className="mt-4 text-muted-foreground">Admin Bereich</p>
+              <p className="mt-4 text-muted-foreground">Admin Area</p>
             </div>
 
             <div className="glass rounded-3xl p-8 shadow-elegant">
@@ -58,7 +58,7 @@ export const AuthWrapper = ({ children }: AuthWrapperProps) => {
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Passwort eingeben"
+                  placeholder="Enter password"
                   className="w-full px-4 py-3 rounded-xl bg-background/50 border-border focus:border-primary focus:outline-none transition-colors mb-4"
                   autoFocus
                 />

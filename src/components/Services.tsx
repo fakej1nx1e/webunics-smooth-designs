@@ -6,32 +6,32 @@ const services = [
   {
     icon: Palette,
     title: "Bespoke Design",
-    desc: "Individuelle Designs ohne Templates. Jede Pixel-Entscheidung trägt deine Marke.",
+    desc: "Custom designs without templates. Every pixel decision carries your brand.",
   },
   {
     icon: Code2,
     title: "Modernes Development",
-    desc: "Sauberer Code mit React, TypeScript & Tailwind. Wartbar, skalierbar, performant.",
+    desc: "Clean code with React, TypeScript & Tailwind. Maintainable, scalable, performant.",
   },
   {
     icon: Smartphone,
     title: "Responsive zuerst",
-    desc: "Perfekte Darstellung auf jedem Device — vom 320px-Handy bis zum 4K-Monitor.",
+    desc: "Perfect display on every device — from 320px mobile to 4K monitor.",
   },
   {
     icon: Rocket,
     title: "Performance",
-    desc: "Lighthouse 95+, sub-second loads. Geschwindigkeit ist ein Feature.",
+    desc: "Lighthouse 95+, sub-second loads. Speed is a feature.",
   },
   {
     icon: Search,
     title: "SEO Foundation",
-    desc: "Saubere Semantik, Meta-Setup, strukturierte Daten — Google liebt deine Seite.",
+    desc: "Clean semantics, meta setup, structured data — Google loves your site.",
   },
   {
     icon: Wand2,
     title: "Smooth Animations",
-    desc: "Subtile Micro-Interactions, die deine Seite lebendig und premium wirken lassen.",
+    desc: "Subtle micro-interactions that make your site feel alive and premium.",
   },
 ];
 
@@ -98,7 +98,7 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            Was wir tun
+            What we do
           </motion.div>
           <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-balance">
             End-to-End Webdesign &{" "}
@@ -111,8 +111,8 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Von der ersten Idee bis zum Launch — wir übernehmen den gesamten Prozess
-            und liefern Ergebnisse, auf die wir stolz sind.
+From the first idea to launch — we handle the entire process
+              and deliver results we're proud of.
           </motion.p>
         </motion.div>
 

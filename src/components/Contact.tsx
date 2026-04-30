@@ -51,7 +51,7 @@ const Contact = () => {
     };
 
     const newInquiry = {
-      timestamp: new Date().toLocaleString("de-DE"),
+      timestamp: new Date().toLocaleString("en-US"),
       name: data.name,
       email: data.email,
       company: data.company || "",
@@ -71,11 +71,11 @@ const Contact = () => {
         body: JSON.stringify(newInquiry),
       });
     } catch (error) {
-      console.error("Fehler beim Senden an Server:", error);
+      console.error("Error sending to server:", error);
     }
 
-    toast.success("Nachricht gesendet!", {
-      description: "Wir melden uns innerhalb von 24h bei dir.",
+    toast.success("Message sent!", {
+      description: "We'll get back to you within 24h.",
     });
     form.reset();
     setLoading(false);
@@ -108,15 +108,15 @@ const Contact = () => {
             <div className="relative grid lg:grid-cols-2 gap-12 items-start">
               <div>
                 <div className="text-sm font-medium text-accent mb-4 tracking-widest uppercase">
-                  Lass uns reden
+                  Let's talk
                 </div>
                 <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-balance">
-                  Bereit für deine{" "}
-                  <span className="text-gradient">neue Website?</span>
+                  Ready for your{" "}
+                  <span className="text-gradient">new website?</span>
                 </h2>
                 <p className="mt-5 text-lg text-muted-foreground max-w-md">
-                  Erzähl uns kurz von deinem Projekt — wir melden uns innerhalb
-                  von 24 Stunden mit einer ehrlichen Einschätzung.
+                  Tell us briefly about your project — we'll get back to you within
+                  24 hours with an honest assessment.
                 </p>
 
                 <div className="mt-10 space-y-4">
@@ -133,7 +133,7 @@ const Contact = () => {
                     <span className="h-10 w-10 rounded-xl glass flex items-center justify-center">
                       <MapPin size={16} />
                     </span>
-                    Remote · Europa
+                    Remote · Europe
                   </div>
                 </div>
               </div>
@@ -148,27 +148,27 @@ const Contact = () => {
                       id="name"
                       name="name"
                       required
-                      placeholder="Dein Name"
+                      placeholder="Your name"
                       className="mt-2 w-full bg-secondary/40 border-border/60 h-12 px-3 rounded-md focus:outline-none focus:border-primary focus:opacity-100 opacity-70 transition-opacity duration-300"
                     />
                   </div>
                   <div>
                     <Label htmlFor="email" className="text-sm">
-                      E-Mail
+                      Email
                     </Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       required
-                      placeholder="dich@firma.de"
+                      placeholder="you@company.com"
                       className="mt-2 w-full bg-secondary/40 border-border/60 h-12 px-3 rounded-md focus:outline-none focus:border-primary focus:opacity-100 opacity-70 transition-opacity duration-300"
                     />
                   </div>
                 </div>
                 <div>
                   <Label htmlFor="company" className="text-sm">
-                    Unternehmen
+                    Company
                   </Label>
                   <Input
                     id="company"
@@ -179,13 +179,13 @@ const Contact = () => {
                 </div>
                 <div>
                   <Label htmlFor="message" className="text-sm">
-                    Worum geht's?
+                    What's this about?
                   </Label>
                   <Textarea
                     id="message"
                     name="message"
                     required
-                    placeholder="Erzähl uns kurz von deinem Projekt..."
+                    placeholder="Tell us briefly about your project..."
                     className="mt-2 w-full bg-secondary/40 border-border/60 min-h-32 p-3 rounded-md focus:outline-none focus:border-primary focus:opacity-100 opacity-70 transition-opacity duration-300"
                   />
                 </div>
@@ -200,7 +200,7 @@ const Contact = () => {
                     className="w-full"
                     disabled={loading}
                   >
-                    {loading ? "Wird gesendet…" : "Anfrage senden"}
+                    {loading ? "Sending..." : "Send Inquiry"}
                     <ArrowRight size={18} className="ml-1" />
                   </Button>
                 </motion.div>

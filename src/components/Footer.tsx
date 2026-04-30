@@ -8,7 +8,7 @@ const Footer = () => {
   const footerLinks = [
     { href: "#services", label: "Services" },
     { href: "#portfolio", label: "Portfolio" },
-    { href: "#contact", label: "Kontakt" },
+    { href: "#contact", label: "Contact" },
   ];
 
   return (
@@ -67,7 +67,7 @@ const Footer = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            © {new Date().getFullYear()} Webunics. Alle Rechte vorbehalten.
+            © {new Date().getFullYear()} Webunics. All rights reserved.
           </motion.div>
         </motion.div>
       </div>

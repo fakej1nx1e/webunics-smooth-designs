@@ -152,7 +152,7 @@ const Hero = () => {
   const stats = [
     { value: "50+", label: "Launches" },
     { value: "98%", label: "PageSpeed Score" },
-    { value: "2x", label: "⌀ Conversion-Lift" },
+    { value: "2x", label: "⌀ Conversion Lift" },
   ];
 
   return (
@@ -224,19 +224,19 @@ const Hero = () => {
               transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
               <Sparkles size={14} className="text-accent" />
-              <span>Bespoke Webdesign · 2025 verfügbar</span>
+              <span>Bespoke Webdesign · Available 2025</span>
             </motion.div>
 
             <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-balance mb-8">
-              <StaggeredText delay={0.3}>Websites, die deine Marke</StaggeredText>{" "}
-              <motion.span
-                className="text-gradient bg-[length:200%_auto] animate-gradient-shift animate-heartbeat-glow"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
-              >
-                strahlen lassen.
-              </motion.span>
+<StaggeredText delay={0.3}>Websites that make your brand</StaggeredText>{" "}
+                <motion.span
+                  className="text-gradient bg-[length:200%_auto] animate-gradient-shift animate-heartbeat-glow"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.8, delay: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+                >
+                  shine.
+                </motion.span>
             </h1>
 
             <motion.p
@@ -245,9 +245,9 @@ const Hero = () => {
               animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
               transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
             >
-              Wir sind Webunics — ein zweiköpfiges Studio für moderne,
-              performante Websites. Strategisch durchdacht, handwerklich
-              poliert, messbar wirksam.
+              We are Webunics — a two-person studio for modern,
+              high-performance websites. Strategically crafted, meticulously
+              polished, measurably effective.
             </motion.p>
 
             <motion.div
@@ -257,11 +257,11 @@ const Hero = () => {
               transition={{ duration: 0.8, delay: 0.6 }}
             >
               <MagneticButton href="#contact" variant="iridescent" size="xl">
-                Projekt starten
+                Start Project
                 <ArrowRight size={18} className="ml-1" />
               </MagneticButton>
               <MagneticButton href="#portfolio" variant="glass" size="xl">
-                Unsere Arbeit
+                Our Work
               </MagneticButton>
             </motion.div>
 

@@ -5,22 +5,22 @@ const steps = [
   {
     n: "01",
     title: "Discovery Call",
-    desc: "Wir lernen dein Business kennen, klären Ziele und definieren den Scope. Kostenlos & unverbindlich.",
+    desc: "We get to know your business, clarify goals and define the scope. Free & non-binding.",
   },
   {
     n: "02",
     title: "Design",
-    desc: "Wir entwerfen ein maßgeschneidertes Design, das deine Marke transportiert und Conversions im Blick hat.",
+    desc: "We design a tailored design that carries your brand and keeps conversions in mind.",
   },
   {
     n: "03",
     title: "Development",
-    desc: "Wir bauen deine Website mit modernen Tools — schnell, sicher und SEO-ready.",
+    desc: "We build your website with modern tools — fast, secure, and SEO-ready.",
   },
   {
     n: "04",
     title: "Launch & Care",
-    desc: "Live-Schaltung, Performance-Check, optionaler Wartungsvertrag. Wir bleiben an deiner Seite.",
+    desc: "Go live, performance check, optional maintenance contract. We stay by your side.",
   },
 ];
 
@@ -56,11 +56,11 @@ const Process = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            So arbeiten wir
+            How we work
           </motion.div>
           <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight text-balance">
-            Vier Schritte zu deiner{" "}
-            <span className="text-gradient">neuen Website</span>
+Four steps to your{" "}
+              <span className="text-gradient">new website</span>
           </h2>
         </motion.div>
 
