@@ -6,13 +6,20 @@ import heroPrism from "@/assets/hero-prism.jpg";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 const AnimatedCounter = ({ value, duration = 2 }: { value: string; duration?: number }) => {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
   const [display, setDisplay] = useState("0");
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    if (!isInView) return;
+    setIsAnimating(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isAnimating) return;
     const numericValue = parseInt(value.replace(/\D/g, ""));
+    if (isNaN(numericValue)) {
+      setDisplay(value);
+      return;
+    }
     const suffix = value.replace(/[\d\s]/g, "");
     let start = 0;
     const increment = numericValue / (duration * 60);
@@ -26,9 +33,9 @@ const AnimatedCounter = ({ value, duration = 2 }: { value: string; duration?: nu
       }
     }, 1000 / 60);
     return () => clearInterval(timer);
-  }, [isInView, value, duration]);
+  }, [isAnimating, value, duration]);
 
-  return <span ref={ref}>{display}</span>;
+  return <span>{display}</span>;
 };
 
 const StaggeredText = ({ children, delay = 0 }: { children: string; delay?: number }) => {
@@ -313,7 +320,7 @@ const Hero = () => {
                   width={1280}
                   height={1280}
                   className="w-full h-auto rounded-2xl"
-                  fetchPriority="high"
+                  fetchpriority="high"
                   initial={{ scale: 1.1, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 1.2, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}

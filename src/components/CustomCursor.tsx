@@ -66,18 +66,12 @@ export const CustomCursor = () => {
       const el = document.elementFromPoint(xVal, yVal);
       if (!el) return;
 
-      const interactive =
-        el.tagName === "BUTTON" ||
-        el.tagName === "A" ||
-        el.tagName === "INPUT" ||
-        el.tagName === "TEXTAREA" ||
-        el.closest("button") ||
-        el.closest("a") ||
-        el.closest("[role='button']") ||
-        el.closest("[data-cursor-pointer]");
+      const interactiveEl = 
+        (el.tagName === "BUTTON" || el.tagName === "A" || el.tagName === "INPUT" || el.tagName === "TEXTAREA") ? el :
+        el.closest("button, a, [role='button'], [data-cursor-pointer]");
 
-      setIsPointer(!!interactive);
-      setHoveredRect(interactive ? (interactive as HTMLElement).getBoundingClientRect() : null);
+      setIsPointer(!!interactiveEl);
+      setHoveredRect(interactiveEl ? interactiveEl.getBoundingClientRect() : null);
     };
 
     const interval = setInterval(updateCursor, 50);
