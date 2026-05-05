@@ -1,5 +1,5 @@
 import { ArrowRight, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, type ButtonProps } from "@/components/ui/button";
 import { motion, useScroll, useTransform, useSpring, useMotionValue, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import heroPrism from "@/assets/hero-prism.jpg";
@@ -55,7 +55,7 @@ const StaggeredText = ({ children, delay = 0 }: { children: string; delay?: numb
       opacity: 1,
       y: 0,
       filter: "blur(0px)",
-      transition: { type: "spring", stiffness: 200, damping: 20 },
+      transition: { type: "spring" as const, stiffness: 200, damping: 20 },
     },
   };
 
@@ -83,7 +83,7 @@ const StaggeredText = ({ children, delay = 0 }: { children: string; delay?: numb
   );
 };
 
-const MagneticButton = ({ children, href, variant, size }: { children: React.ReactNode; href: string; variant?: string; size?: string }) => {
+const MagneticButton = ({ children, href, variant, size }: { children: React.ReactNode; href: string; variant?: ButtonProps["variant"]; size?: ButtonProps["size"] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { isTouch } = useIsMobile();
   const x = useMotionValue(0);
@@ -117,7 +117,7 @@ const MagneticButton = ({ children, href, variant, size }: { children: React.Rea
       whileHover={isTouch ? undefined : { scale: 1.02 }}
       whileTap={isTouch ? undefined : { scale: 0.98 }}
     >
-      <Button asChild variant={variant as any} size={size as any}>
+      <Button asChild variant={variant} size={size}>
         <a href={href}>{children}</a>
       </Button>
     </motion.div>
@@ -320,7 +320,7 @@ const Hero = () => {
                   width={1280}
                   height={1280}
                   className="w-full h-auto rounded-2xl"
-                  fetchpriority="high"
+                  fetchPriority="high"
                   initial={{ scale: 1.1, opacity: 0 }}
                   animate={isInView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 1.2, delay: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}

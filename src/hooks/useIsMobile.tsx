@@ -9,8 +9,7 @@ export const useIsMobile = (breakpoint = 768) => {
       setIsMobile(window.innerWidth < breakpoint);
       setIsTouch(
         "ontouchstart" in window ||
-        navigator.maxTouchPoints > 0 ||
-        (navigator as any).msMaxTouchPoints > 0
+        navigator.maxTouchPoints > 0
       );
     };
 
