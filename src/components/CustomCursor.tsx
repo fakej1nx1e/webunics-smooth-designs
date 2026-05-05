@@ -37,7 +37,7 @@ export const CustomCursor = () => {
       dotScale.set(1);
       ringOpacity.set(0.6);
     }
-  }, [isPointer, isClicking]);
+  }, [isPointer, isClicking, dotScale, ringOpacity, ringScale]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {

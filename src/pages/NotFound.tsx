@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import { motion, useInView, useAnimation } from "framer-motion";
 
@@ -87,17 +87,18 @@ const NotFound = () => {
           The page you&apos;re looking for doesn&apos;t exist.
         </motion.p>
 
-        <motion.a
-          href="/"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-iridescent text-background font-medium hover:opacity-90 transition-opacity"
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.6 }}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
         >
-          Return to Home
-        </motion.a>
+          <Link
+            to="/"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-iridescent text-background font-medium hover:opacity-90 transition-opacity"
+          >
+            Return to Home
+          </Link>
+        </motion.div>
       </motion.div>
     </div>
   );
