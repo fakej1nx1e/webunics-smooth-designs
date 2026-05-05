@@ -65,13 +65,17 @@ const Contact = () => {
     localStorage.setItem("webunics_inquiries", JSON.stringify(existing));
 
     try {
-      await fetch(`${LOCAL_SERVER_URL}/inquiries`, {
+      const response = await fetch(`${LOCAL_SERVER_URL}/inquiries`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(newInquiry),
       });
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
+      }
     } catch (error) {
       console.error("Error sending to server:", error);
+      // Inquiry is still saved locally, so data is not lost
     }
 
     toast.success("Message sent!", {

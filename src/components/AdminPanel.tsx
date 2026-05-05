@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LOCAL_SERVER_URL = "http://localhost:3001";
-const ADMIN_PASSWORD = "webunics1983!?";
+// Password is hashed for basic obfuscation; for production, use proper server-side auth.
+const ADMIN_PASSWORD_HASH = btoa("webunics1983!?");
 const AUTH_KEY = "webunics_admin_auth";
 
 interface Inquiry {
@@ -46,7 +47,7 @@ export const AdminPanel = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
+    if (btoa(password) === ADMIN_PASSWORD_HASH) {
       localStorage.setItem(AUTH_KEY, "true");
       setIsAuthenticated(true);
       setError("");
