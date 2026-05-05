@@ -10,7 +10,7 @@ const steps = [
   {
     n: "02",
     title: "Design",
-    desc: "We design a tailored design that carries your brand and keeps conversions in mind.",
+    desc: "We design a tailored interface that reflects your brand and keeps conversions in mind.",
   },
   {
     n: "03",

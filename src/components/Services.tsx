@@ -10,12 +10,12 @@ const services = [
   },
   {
     icon: Code2,
-    title: "Modernes Development",
+    title: "Modern Development",
     desc: "Clean code with React, TypeScript & Tailwind. Maintainable, scalable, performant.",
   },
   {
     icon: Smartphone,
-    title: "Responsive zuerst",
+    title: "Responsive First",
     desc: "Perfect display on every device — from 320px mobile to 4K monitor.",
   },
   {
